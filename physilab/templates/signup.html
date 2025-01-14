@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physilab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" href="{% static 'images/logo3.png' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="PhysiLab Logo" class="logo">
+            <h1>PhysiLab</h1>
+        </div>
+    </header>
+
+    <p class="logo-text-signup"></p>
+
+    <div class="signup-container">    
+        {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    
+        <form id="signup-form" method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+
+            <label for="signup-username">{{ form.username.label }}</label>
+            {{ form.username }}
+            
+            <label for="signup-email">{{ form.email.label }}</label>
+            {{ form.email }}
+    
+            <label for="signup-password">{{ form.password1.label }}</label>
+            {{ form.password1 }}
+    
+            <label for="signup-confirm-password">{{ form.password2.label }}</label>
+            {{ form.password2 }}
+    
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+    
+        <div class="signup-option">
+            <p>Sudah punya akun? <a href="{% url 'login' %}">Masuk Sekarang</a></p>
+        </div>
+    </div>
+    
+</body>
+</html>

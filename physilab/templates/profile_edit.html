@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="PhysiLab Logo" class="logo">
+            <h1>PhysiLab</h1>
+        </div>
+    </header>   
+
+    <div class="back-container">
+        <a href="{% url 'profile_view' %}" class="back-button">
+            <img src="{% static 'images/back.png' %}" alt="Back" class="back-icon">
+        </a> 
+    </div>    
+
+    <div class="profile-container">
+        <div class="profile-card">
+            <form method="POST">
+                {% csrf_token %}
+                
+                {{ user_form.username.label_tag }} {{ user_form.username }}
+                {{ user_form.email.label_tag }} {{ user_form.email }}
+                
+                <button type="submit" class="btn">Edit Profile</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

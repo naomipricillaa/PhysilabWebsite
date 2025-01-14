@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physilab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" href="{% static 'images/logo3.png' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="PhysiLab Logo" class="logo">
+            <h1>PhysiLab</h1>
+        </div>
+        <nav class="nav-links-mobile-only">
+            <a href="landing.html" class="home-link">Home</a>
+        </nav>
+        <nav class="nav-links">
+            <a href="{% url 'calc' %}" class="nav-link">Calculator</a>
+            <a href="{% url 'material' %}" class="nav-link">Material</a>
+            <a href="{% url 'landing_page' %}" class="nav-link">Home</a>
+            <a href="{% url 'profile_view' %}">Profile</a>
+        </nav>
+    </header>
+
+    <p class="below-header-text1">Thermodynamics Virtual Lab Material</p>
+
+    <section class="material-section">
+        <div class="rumus-container">
+            <img src="{% static 'images/rumus.png' %}" alt="Rumus" class="rumus">
+        </div>
+        <div class="text-background">
+            <p>
+                Thermodynamics is a branch of physics that deals with the relationships between heat and other forms of energy. In thermodynamics, we study how energy is transferred in a system and how it affects matter. One of the most fundamental laws in thermodynamics is the Ideal Gas Law. The Ideal Gas Law describes the relationship between the pressure (P), volume (V), temperature (T), and the amount of gas in moles (n).
+            </p>
+            <p>
+                This law helps us understand how gases behave under different conditions, including changes in temperature. It is particularly useful for predicting how gases will react in closed systems, such as in laboratory experiments or industrial processes.
+            </p>
+        </div>
+    </section>
+
+    <section class="example-problems-section">
+        <h2>Example Problems</h2>
+        <!-- First Problem -->
+        <div class="problem-container">
+            <div class="problem">
+                If the temperature of an ideal gas increases from 300 K to 600 K while keeping the volume constant, what happens to the pressure?
+            </div>
+            <div class="answer-container">
+                <div class="answer">
+                    <input type="radio" id="option1_1" name="problem1" value="a">
+                    <label for="option1_1">Doubles</label>
+                </div>
+                <div class="answer">
+                    <input type="radio" id="option1_2" name="problem1" value="b">
+                    <label for="option1_2">Same</label>
+                </div>
+                <div class="answer">
+                    <input type="radio" id="option1_3" name="problem1" value="c">
+                    <label for="option1_3">Decreases</label>
+                </div>
+                <div class="answer">
+                    <input type="radio" id="option1_4" name="problem1" value="d">
+                    <label for="option1_4">Increases</label>
+                </div>
+            </div>
+            <div id="result1" class="result"></div>
+        </div>
+
+        <!-- Second Problem -->
+        <div class="problem-container">
+            <div class="problem">
+                A sealed container holds 1.5 moles of an ideal gas at a volume of 0.03 m³ and a temperature of 300 K. What is the pressure of the gas inside the container in Pascals (Pa)?
+            </div>
+            <div class="answer-container">
+                <div class="answer">
+                    <input type="radio" id="option2_1" name="problem2" value="a">
+                    <label for="option2_1">123,210 Pa</label>
+                </div>
+                <div class="answer">
+                    <input type="radio" id="option2_2" name="problem2" value="b">
+                    <label for="option2_2">124,710 Pa</label>
+                </div>
+                <div class="answer">
+                    <input type="radio" id="option2_3" name="problem2" value="c">
+                    <label for="option2_3">121,470 Pa</label>
+                </div>
+                <div class="answer">
+                    <input type="radio" id="option2_4" name="problem2" value="d">
+                    <label for="option2_4">122,210 Pa</label>
+                </div>
+            </div>
+            <div id="result2" class="result"></div>
+        </div>
+
+        <!-- Third Problem -->
+        <div class="problem-container">
+            <div class="problem">
+                An ideal gas is contained in a 0.05 m³ container, with 2 moles of gas at a temperature of 350 K. What is the pressure of the gas inside the container in Pascals (Pa)?
+            </div>
+            <div class="answer-container">
+                <div class="answer">
+                    <input type="radio" id="option3_1" name="problem3" value="a">
+                    <label for="option3_1">116,396 Pa</label>
+                </div>
+                <div class="answer">
+                    <input type="radio" id="option3_2" name="problem3" value="b">
+                    <label for="option3_2">115,396 Pa</label>
+                </div>
+                <div class="answer">
+                    <input type="radio" id="option3_3" name="problem3" value="c">
+                    <label for="option3_3">117,498 Pa</label>
+                </div>
+                <div class="answer">
+                    <input type="radio" id="option3_4" name="problem3" value="d">
+                    <label for="option3_4">118,650 Pa</label>
+                </div>
+            </div>
+            <div id="result3" class="result"></div>
+        </div>
+
+        <button id="checkAnswerBtn">Check your answer</button>
+    </section>
+
+    <script src="{% static 'js/content.js' %}"></script>
+</body>
+</html>

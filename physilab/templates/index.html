@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physilab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" href="{% static 'images/logo3.png' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="PhysiLab Logo" class="logo">
+            <h1>PhysiLab</h1>
+        </div>
+    </header>
+
+    <div class="content-container">
+        <div class="text-content">
+            <h1>Explore Physics Virtually, Understand Thermodynamics Clearly</h1>
+            <p>
+                PhysiLab is an interactive platform that allows you to explore thermodynamics concepts through virtual simulations. Understand the ideal gas law and calculate gas pressure as you observe how temperature affects thermodynamic systems.
+            </p>
+            <div class="button-container">
+                <a href="{% url 'login' %}" class="btn-start">Start Learning!</a>
+            </div>
+        </div>
+        <div class="image-content">
+            <img src="{% static 'images/orang.png' %}" alt="Illustration">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+
+{
+    "builds": [
+      {
+        "src": "physilab/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "physilab/wsgi.py"
+      }
+    ]
+  }
+  

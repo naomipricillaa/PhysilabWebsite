@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhysiLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" href="{% static 'images/logo3.png' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="PhysiLab Logo" class="logo">
+            <h1>PhysiLab</h1>
+        </div>
+        <nav class="nav-links-mobile-only">
+            <a href="{% url 'landing_page' %}" class="home-link">Home</a>
+        </nav>
+        <nav class="nav-links">
+            <a href="{% url 'calc' %}" class="nav-link">Calculator</a>
+            <a href="{% url 'material' %}" class="nav-link">Material</a>
+            <a href="{% url 'landing_page' %}" class="nav-link">Home</a>
+            <a href="{% url 'profile_view' %}">Profile</a>
+        </nav>
+    </header>
+
+    <p class="below-header-text1">Thermodynamics Virtual Lab Calculator</p>
+
+    <section class="calc-section">
+        <div class="lab-container">
+            <div class="thermometer-container">
+                <img src="{% static 'images/thermometer.png' %}" alt="Termometer" class="thermometer">
+                <input type="range" min="273" max="373" value="300" id="suhuSlider" oninput="updateSuhu(this.value)">
+                <p id="suhuValue">Suhu: 300K</p>
+            </div>
+
+            <form method="post" action="{% url 'calc' %}">
+                {% csrf_token %}
+                <div class="input-container">
+                    <label for="volume">Volume (m³):</label>
+                    <input type="number" id="volume" name="volume" placeholder="Masukkan volume dalam m³" value="5">
+                    <label for="mol">Jumlah Mol (mol):</label>
+                    <input type="number" id="mol" name="mol" placeholder="Masukkan jumlah mol" value="5">
+                    <label for="suhu">Suhu (K):</label>
+                    <input type="number" id="suhu" name="suhu" value="300" readonly>
+                    <button type="submit">Hitung Tekanan</button>
+                </div>
+            </form>
+            
+            <div class="results-wrapper">
+                <div class="result-container">
+                    <h3>Hasil Perhitungan:</h3>
+                    <p id="tekananOutput">{{ result }}</p> 
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hist-section">
+        <h2>History Perhitungan</h2>
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Volume</th>
+                    <th>Jumlah Mol</th>
+                    <th>Suhu</th>
+                    <th>Tekanan Gas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in history %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>5 m³</td>  <!-- Adjust if volume data is available in history -->
+                    <td>5 mol</td>  <!-- Adjust if mol data is available in history -->
+                    <td>300 K</td>  <!-- Adjust if suhu data is available in history -->
+                    <td>{{ entry.result }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'clear_history' %}" class="clear-history-button">Clear History</a>
+    </section>
+    
+
+    <script src="{% static 'js/content.js' %}"></script>
+</body>
+</html>

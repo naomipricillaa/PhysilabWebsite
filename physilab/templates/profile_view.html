@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="PhysiLab Logo" class="logo">
+            <h1>PhysiLab</h1>
+        </div>
+        <nav class="nav-links">
+            <a href="{% url 'calc' %}" class="nav-link">Calculator</a>
+            <a href="{% url 'material' %}" class="nav-link">Material</a>
+            <a href="{% url 'landing_page' %}" class="nav-link">Home</a>
+            <a href="{% url 'profile_view' %}">Profile</a>
+        </nav>
+    </header>
+
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="profile-picture">
+                <img src="{% static 'images/profile.png' %}" alt="Profile Picture" />
+            </div>
+            <div class="profile-info">
+                <label>Username:</label>
+                <input type="text" value="{{ user.username }}" readonly>
+                
+                <label>Email:</label>
+                <input type="text" value="{{ user.email }}" readonly>
+                
+            </div>
+            <form action="{% url 'profile_edit' %}" method="post" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="btn-logout">Edit Profile</button>
+            </form>
+            <form action="{% url 'logout' %}" method="post" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="btn-logout">Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
