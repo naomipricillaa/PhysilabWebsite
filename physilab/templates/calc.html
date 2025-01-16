@@ -64,6 +64,9 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Volume (m³)</th>
+                    <th>Mol (mol)</th>
+                    <th>Suhu (K)</th>
                     <th>Tekanan Gas</th>
                 </tr>
             </thead>
@@ -71,6 +74,9 @@
                 {% for entry in history %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
+                    <td>{{ entry.volume }}</td>
+                    <td>{{ entry.mol }}</td>
+                    <td>{{ entry.temperature }}</td>
                     <td>{{ entry.result }}</td>
                 </tr>
                 {% endfor %}

@@ -28,7 +28,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('landing_page')  # Use 'landing_page' instead of 'home'
+            return redirect('landing_page') 
         else:
             messages.error(request, "Username or password is incorrect.")
     return render(request, 'login.html')
@@ -43,7 +43,7 @@ def profile_edit(request):
         if user_form.is_valid():
             user_form.save()
             messages.success(request, 'Your profile has been updated successfully.')
-            return redirect('profile_view')  # Redirect back to the profile view page
+            return redirect('profile_view')  
     else:
         user_form = UserUpdateForm(instance=request.user)
 
@@ -55,7 +55,7 @@ def profile_edit(request):
 def logout_view(request):
     logout(request)
     messages.info(request, "Anda telah keluar.")
-    return redirect('index')  # Update to the desired logout redirect page
+    return redirect('index') 
 
 
 from django.shortcuts import render, redirect
@@ -74,34 +74,36 @@ def material_page(request):
 
 def calculate_pressure(request):
     if request.method == 'POST':
-        # Retrieve input values from the form
         volume = float(request.POST.get('volume'))
         mol = float(request.POST.get('mol'))
-        suhu = float(request.POST.get('suhu'))
+        temperature = float(request.POST.get('suhu'))  
 
-        # Perform the calculation (example: Ideal Gas Law)
-        pressure = mol * 8.314 * suhu / volume  # P = nRT/V
+        R = 8.314 
+        pressure = mol * R * temperature / volume 
         result = f"{pressure:.2f} Pa"
 
-        # Save the new calculation to the history
-        CalculationHistory.objects.create(user=request.user, result=result)
+        CalculationHistory.objects.create(
+            user=request.user,
+            volume=volume,
+            mol=mol,
+            temperature=temperature,
+            result=result
+        )
 
-        # Retrieve all calculations for this user
-        history = CalculationHistory.objects.filter(user=request.user).order_by('created_at')
+        history = CalculationHistory.objects.filter(user=request.user).order_by('-created_at')
 
-        # Pass the result and history to the template
         context = {
             'result': result,
             'history': history,
+            'volume': volume,
+            'mol': mol,
+            'temperature': temperature,
         }
         return render(request, 'calc.html', context)
     else:
-        # On GET request, fetch all history without performing a new calculation
         history = CalculationHistory.objects.filter(user=request.user).order_by('-created_at')
         return render(request, 'calc.html', {'history': history})
 
 def clear_history(request):
-    # Delete all calculation history for the logged-in user
     CalculationHistory.objects.filter(user=request.user).delete()
-    # Redirect back to the calculator page (or wherever you want)
     return redirect('calc')
